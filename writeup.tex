@@ -13,6 +13,8 @@
 \usepackage{fancyhdr}
 \usepackage{tcolorbox}
 \usepackage{listings}
+\usepackage{graphicx}
+\usepackage{gensymb}
 
 \pagestyle{fancy}
 
@@ -209,7 +211,7 @@
 
     \newpage
 
-    Wir wollen nun diesen Code in python umsetzen
+    Wir wollen nun diesen Code in python umsetzen (zu finden ab dem 09.03.2022 unter https://github.com/uuk0/BuMa2022/blob/main/runde\%201/Aufgabe2\_final.py)
 
     \lstset{language=Python}
     \lstset{frame=lines}
@@ -264,5 +266,72 @@
 
     print(len(D))
     \end{lstlisting}
+
+    \newpage
+
+    Führt man obiges Program für verschiedene Werte für n aus, ergeben sich folgende Werte:
+
+    \begin{tabular}{c c}
+        n & $|D_n|$ \\
+        1 & 4 \\
+        2 & 23 \\
+        3 & 90 \\
+        \ldots & \ldots \\
+        8 & 1985 \\
+        9 & 2844 \\
+        10 & 3919 \\
+        \ldots & \ldots \\
+    \end{tabular}
+
+    \bigskip
+
+    Somit sind die gesuchten Werte $n=9$ mit 2844 einzeichen-baren Dreiecken und insgesamt 8 Mitteldreiecke
+
+    \newpage
+
+    \subsection*{Aufgabe 3}
+
+    Skizze: (für eine farbige Version siehe https://github.com/uuk0/BuMa2022/)
+
+    \includegraphics{"Aufgabe3_Skizze1_grayscale.jpg"}
+
+    Wir wollen beweisen, dass $\angle APQ = \angle QPB$ ist.
+
+    Da uns nur Winkel interessieren, interessieren uns nur die Seitenverhältnisse, also
+    $\frac{\overline{mP'}}{\overline{MP''}}$, und der Winkel $\alpha$ unter Q, also $\angle QPP'$.
+
+    O.b.d.A. können wir $0 \degree < \alpha < 180 \degree$ setzen und $\overline{MP''} = 1$,
+    ersteres aufgrund der Achsensymmetrie zur Horizontalen, zweiteres aufgrund der Ähnlichkeits-regeln.
+
+    \newpage
+
+    \subsection*{Aufgabe 4}
+
+    Wir stellen zunächst fest, dass der größte Teiler einer Zahl immer sie selbst ist.
+
+    Das heist, sofern die Zahl selbst nicht durch drei Teilbar ist, ist $a_k = k$.
+
+    Wir definieren nun $\phi(k) = \begin{cases}k & \text{wenn } k\text{ mod }3 \not \equiv 0 \\\phi(\frac{k}{3}) & \text{sonst}\end{cases}$
+
+    Dabei stellt $\phi(k)$ gleichzeitig $a_k$ dar.
+
+    \bigskip
+
+    Wir stellen weiterhin fest, das jede dritte Zahl durch drei Teilbar ist, jede neunte durch neun,
+    jede 27 durch 27, und so weiter.
+
+    \bigskip
+
+    Eine Eigenschaft der Zahlen im Dreiersystem ist, das sie alle 3 einen `roll-over` haben an der
+    1-er stelle, alle $3^2$ an der $3^2$ Stelle, alle $3^3$ an der $3^3$ Stelle usw.
+
+    Damit steht an der 1-er Stelle alle 3 eine 1, an der 3-er Stelle alle $3^2$, an der $3^2$ Stelle
+    alle $3^3$, usw.
+
+    \bigskip
+
+    Weiterhin stellen wir fest, dass eine Summe von natürlichen Zahlen genau dann durch 3 teilbar ist,
+    wenn $\Sigma(a_n\text{ mod }3) \equiv 0 (\text{mod }5)$
+
 
 \end{document}
