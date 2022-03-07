@@ -291,17 +291,49 @@
 
     \subsection*{Aufgabe 3}
 
-    Skizze: (für eine farbige Version siehe https://github.com/uuk0/BuMa2022/)
+    Skizze: (für eine farbige Version siehe https://github.com/uuk0/BuMa2022/, Skizze 2)
 
-    \includegraphics{"Aufgabe3_Skizze1_grayscale.jpg"}
+    \includegraphics{"Aufgabe3_Skizze2_grayscale.jpg"}
 
     Wir wollen beweisen, dass $\angle APQ = \angle QPB$ ist.
 
-    Da uns nur Winkel interessieren, interessieren uns nur die Seitenverhältnisse, also
-    $\frac{\overline{mP'}}{\overline{MP''}}$, und der Winkel $\alpha$ unter Q, also $\angle QPP'$.
+    O.b.d.A. können wir $0 \degree < \alpha < 180 \degree$ setzen aufgrund der Achsensymmetrie zur Horizontalen.
+    Sollte $\alpha > 180\degree$ sein, spiegeln wir die Skizze an der PP'' Achse und erhalten ein $\alpha < 180 \degree$
 
-    O.b.d.A. können wir $0 \degree < \alpha < 180 \degree$ setzen und $\overline{MP''} = 1$,
-    ersteres aufgrund der Achsensymmetrie zur Horizontalen, zweiteres aufgrund der Ähnlichkeits-regeln.
+    Wir bezeichnen $\angle APQ$ mit $\beta_1$ und $\angle BPB$ mit $\beta_2$.
+    Ziel wird es sein, zu beweisen, dass diese gleich groß sind.
+
+    Wir halten fest, das wie schon in der Skizze angedeutet, $\angle PQP' = \angle PBP'' = 90 \degree$ nach dem
+    Satz des Thales.
+
+    Wir bennen den $\angle QmP'$ mit $\alpha$.
+    Dementsprechend ist der $\angle PmQ = 180 \degree - \alpha$.
+
+    Das $\triangle PQm$ ist gleichschenklig, da es zwei Punkte auf einem Kreis und den Kreismittelpunkt als Eckpunkte besitzt.
+    Damit ist $\angle QPm = \angle PQm = \frac{180 \degree - \angle PmQ}{2} = \frac{180\degree - 180 \degree + \alpha}{2} = 90 \degree - \frac{\alpha}{2}$.
+
+    Analoges gilt im $\triangle mQP'$, sodass $\angle mQP' = \angle QP'm = 90 \degree - \frac{\alpha}{2}$.
+
+    Wir wollen nun $\angle PAB$ mit $\delta$ bezeichnen.
+    Nach den Winkelregeln am Kreis ist $\angle BP''P = 180 \degree - \delta$
+    (Vgl. z.B. https://learnattack.de/schuelerlexikon/mathematik/winkel-am-kreis, vorletzter Eintrag, wobei
+    die Strecke $PB$ als Sehne dient, und wir die Punkte $A$ und $P''$ betrachten).
+
+    \newpage
+
+    Im Dreieck $\triangle PBP''$ gilt:
+    \[190 \degree - \delta + 90 \degree + \angle P''PB = 180 \degree \Leftrightarrow \angle P''PB = \delta - 90 \degree\]
+
+    An P gilt weiterhin:
+    \[\frac{\alpha}{2} = \beta_2 + \angle P''PB = \beta_2 + \delta - 90 \degree \Leftrightarrow \beta_2 = 90 \degree - \delta + \frac{\alpha}{2}\]
+
+
+    Im $\triangle APQ$ gilt:
+    \[\delta + \beta_1 + 90 \degree - \frac{\alpha}{2} = 180 \degree \Leftrightarrow \beta_1 = 90 \degree - \delta + \frac{\alpha}{2}\]
+
+    Damit ist bewiesen, dass $\beta_1 = \beta_2$ und damit das die Gerade $PQ$ den Winkel $\angle APB$ teilt.
+
+    $\blacksquare$
 
     \newpage
 
@@ -332,6 +364,45 @@
 
     Weiterhin stellen wir fest, dass eine Summe von natürlichen Zahlen genau dann durch 3 teilbar ist,
     wenn $\Sigma(a_n\text{ mod }3) \equiv 0 (\text{mod }5)$
+
+    Wir wissen, dass alle $a_n$'s der Form $a_{3i+1}$ genau 1 in dieser Summe mitbringt,
+    und alle der Form $a_{3i+2}$ genau 2 beträgt.
+    Damit kommt es auf auf die der Form $a_{3i}$ an.
+
+    Analog trägt diese 1 bei in der Form $a_{9+1}$, und 2 in der Form $a_{9i+2}$.
+
+    Wir können also nie ein $a_n \equiv 0 (\text{mod }3)$ finden.
+
+    Damit gibt es 4 Fälle, in denen das neue $a_n$ die Summe $\equiv 0 (\text{mod }3)$ macht:
+
+    \begin{tabular}{c c c c c}
+        zuvor & 1 & 1 & 2 & 2 \\
+        $a_n \text{ mod } 3$ & 1 & 2 & 1 & 2 \\
+        danach & 2 & $3 \equiv 0$ & $3 \equiv 0$ & $4 \equiv 1$
+    \end{tabular}
+
+    \bigskip
+
+    Sollte die Summe zuvor $\equiv 0 (\text{mod } 3)$ sein, übernimmt sie hier das modulo des neuen Terms.
+
+    Damit gibt es genau zwei Fälle, in dem ein $s_n$ durch drei Teilbar ist, nämlich wenn
+    genau dann, wenn entweder $s_{n-1} \equiv 1 (\text{mod } 3)$ ist und $a_n \equiv 2$ oder umgekehrt.
+
+    In allen anderen Fällen entsteht eine nicht durch 3 teilbare Zahl.
+
+    Diese folge von unterschieden wird in der OEIS unter https://oeis.org/A060236 geführt.
+
+    \bigskip
+
+    Für die Anzahl an 1-er in der Dreierdarstellung einer Zahl:
+
+    Multiplikation mit 3 $\Rightarrow$ nichts ändert sich, da eine 0 dazu kommt
+
+    Multiplikation mit 3 mit angeschlossen + 1 $\Rightarrow$ 1x 1 mehr, da eine neue 1
+
+    Multiplikation mit 3 mit angeschlossen + 2 $\Rightarrow$ nicht änder sich, da eine 2 dazu kommt.
+
+
 
 
 \end{document}
