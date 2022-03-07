@@ -34,7 +34,7 @@
 
     Sei $k_n$ die Anzahl an Nüssen am n-ten Tag.
 
-    Wir wissen das $k_0$, die Anzahl, bevor noch Nüsse dazukommen, gleich 2022 ist.
+    Wir wissen das $k_0$, die Anzahl ohne zusätzliche Nüsse, gleich 2022 ist.
 
     Wir wissen weiterhin, dass $k_1 - k_0 = 2$, $k_2 - k_1 = 4$, $k_3 - k_2 = 6$, \ldots ist.
 
@@ -44,7 +44,7 @@
         k_n = k_{n-1} + 2n = 2022 + \varSigma^{n}_{i=1} (2i) = 2022 + 2 * \varSigma^{n}_{i=1} i
     \]
 
-    Mithilfe der Summenformel von Gauss ergibt dies:
+    Mithilfe der Summenformel ergibt dies:
 
     \[
         = 2022 + 2 * \frac{n(n+1)}{2} = 2022 + n(n+1)
@@ -59,6 +59,8 @@
     \]
 
     Wir unterscheiden nun 5 Fälle für n, nach modulo 5, und untersuchen $n(n+1)$:
+
+    \bigskip
 
     \begin{tabular}{c c c}
         $n \text{ mod } 5$ & $(n+1) \text{ mod } 5$ & (n(n+1)) \text{ mod } 5 \\
@@ -81,7 +83,7 @@
 
     \subsection*{Aufgabe 2}
 
-    Sei n die Anzahl an Mitteldreiecken + 1, also die Anzahl an eingezeichneten Dreiecken inklusive dem gleichseitigen.
+    Sei n die Anzahl an Mitteldreiecken + 1, also die Anzahl an eingezeichneten Dreiecken inklusive dem Ursprünglichen.
 
     \bigskip
 
@@ -91,7 +93,7 @@
     Dreiecks.
     Das einzige Dreieck, was dies erfüllt, ist wieder das gleichseitige Dreieck.
 
-    Weiterhin liegen die Mitten des inneren Dreiecks wieder auf den Verbindungen des äußeren Dreiecks
+    Weiterhin liegen die Mitten der Seiten des inneren Dreiecks wieder auf den Verbindungen des äußeren Dreiecks
     mit den gegenüberliegenden Eckpunkten.
 
     \bigskip
@@ -110,8 +112,8 @@
 
     \bigskip
 
-    Wir können nun diese Anordnung von Dreiecken als Graphen $G_n$ bezeichnen.
-    Dafür wollen wir zunächst eine Verbindungsvorschrift erstellen, die Angibt, welche Knoten
+    Wir können nun diese Anordnung von Dreiecken als Graphen $G_n$ ansehen.
+    Dafür wollen wir zunächst eine Verbindungsvorschrift erstellen, die angibt, welche Knoten
     miteinander Verbunden sind.
 
     Mit folgenden Punkten ist jeder Knoten $X_i$ bis auf den Mittelpunkt verbunden, sofern diese
@@ -119,9 +121,9 @@
 
     \begin{itemize}
         \item Allen anderen $Y_i$, da sie bereits ein Dreieck bilden
-        \item Allen anderen $X_n$ und $M$, da diese alle auf einer Geraden liegen
-        \item Allen $Y_{i+1}$, da die benachbarten auf den Dreiecksseiten liegen, die an dieser Ecke angrenzen
-        \item Allen $Y_{i-1}$, da $Y_i$ entweder die Mitte darstellt
+        \item Allen anderen $X_n$ und $M$, da diese alle auf einer Geraden liegen (die Verbindungsgerade einer Mitte und des gegenüberliegenden Eckpunktes)
+        \item Allen $Y_{i+1}$, da diese die Mitten der Angrezenden Seiten sind
+        \item Allen $Y_{i-1}$, da $X_i$ die Mitte einer Seite ist auf Ebene i-1, und damit mit diesen Verbunden ist (der X_{i-1} Punkt durch die Mitte-Ecke Verbidnung)
     \end{itemize}
 
     \bigskip
@@ -132,7 +134,7 @@
     Drei Punkte liegen in unserem Graphen auf einer Geraden, wenn:
 
     \begin{itemize}
-        \item Sie alle vom selben 'type' sind (z.B. alle vom Type $A_n$), und optional dem Mittelpunkt
+        \item Sie alle vom selben 'Typ' sind (z.B. alle vom Type $A_n$), und optional dem Mittelpunkt
         \item Sie der Form $X_i$, $Y_i$, $Z_{i-1}$ sind, also zwei Eckpunkte und dessen Mittelpunkt
     \end{itemize}
 
@@ -140,6 +142,7 @@
 
     Wir wollen dieses Problem nun mithilfe eines Computerprogramms lösen.
     Ich verwende in der finalen Implementierung python, da es keine Limitationen in vielen Bereichen hat.
+    (Dabei ist vor allem die unbgrenzte Größe von Mengen und ganzzahlen wichtig)
 
     Wir beginnen aber zunächst aber mit einigen Definitionen.
 
@@ -153,7 +156,8 @@
     Diese Menge ist:
     \[\{\{x, y\} \vert x \in M_n \land y \in M_n \land connected(x, y)\}\]
 
-    Aus dieser Menge können wir nun die Menge aller Dreiecke $D_n$ heraus konstruieren, auf folgende Weise:
+    Aus dieser Menge können wir nun die Menge aller Dreiecke $D_n$ heraus konstruieren, auf folgende Weise
+    (wobei x, y und z die Eckpunkte der Dreiecke sind):
     \[D_n = \{\{x, y, z\} \vert \{x, y\} \in G_n \land \{x, z\} \in G_n \land \{y, z\} \in G_n \land on\_one\_line(x, y, z)\}\]
 
     Damit haben wir alle Bausteine für ein Program, was uns die Gesamtanzahl an anzeichenbarer Dreiecke angibt.
@@ -183,13 +187,13 @@
 
         \{
 
-            Wenn Betrag($\{X[0], Y[0], Z[0]\} - \{'M'\}$) == 1 $\rightarrow$ Wahr
+            Falls (Betrag($\{X[0], Y[0], Z[0]\} - \{'M'\}$) == 1) $\rightarrow$ Wahr
 
             s = [X[1], Y[1], Z[1]]
 
             s.sort()
 
-            Wenn s[0] == s[1] == s[2] - 1 $\rightarrow$ Wahr
+            Falls (s[0] == s[1] == s[2] - 1) $\rightarrow$ Wahr
 
             Sonst $\rightarrow$ Falsch
 
@@ -228,10 +232,10 @@
 
 
     def connected(a, b):
-        if (a[0] == "M" or b[0] == "M"):
+        if ((a[0] == "M") or (b[0] == "M")):
             return True
 
-        if (abs(a[1] - b[1] <= 1)):
+        if (abs(a[1] - b[1]) <= 1):
             return True
 
         return False
@@ -323,7 +327,7 @@
     \newpage
 
     Im Dreieck $\triangle PBP''$ gilt:
-    \[190 \degree - \delta + 90 \degree + \angle P''PB = 180 \degree \Leftrightarrow \angle P''PB = \delta - 90 \degree\]
+    \[180 \degree - \delta + 90 \degree + \angle P''PB = 180 \degree \Leftrightarrow \angle P''PB = \delta - 90 \degree\]
 
     An P gilt weiterhin:
     \[\frac{\alpha}{2} = \beta_2 + \angle P''PB = \beta_2 + \delta - 90 \degree \Leftrightarrow \beta_2 = 90 \degree - \delta + \frac{\alpha}{2}\]
@@ -404,7 +408,7 @@
 
     In allen anderen Fällen entsteht eine nicht durch 3 teilbare Zahl.
 
-    Diese folge von unterschieden wird in der OEIS unter https://oeis.org/A060236 geführt.
+    % Diese folge von unterschieden wird in der OEIS unter https://oeis.org/A060236 geführt.
 
     \bigskip
 

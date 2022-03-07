@@ -11,7 +11,7 @@ while True:
         if (a[0] == "M" or b[0] == "M"):
             return True
 
-        if (abs(a[1] - b[1] <= 1)):
+        if (abs(a[1] - b[1]) <= 1):
             return True
 
         return False
